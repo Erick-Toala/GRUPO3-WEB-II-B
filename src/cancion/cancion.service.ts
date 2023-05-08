@@ -22,4 +22,14 @@ export class CancionService {
         const cancion = new this.cancionModel(createCancionDTO);
         return await cancion.save();
     }
+  
+    async deleteCancion(cancionID:string):Promise<Cancion>{
+        const deleteCancion = await this.cancionModel.findByIdAndDelete(cancionID);
+        return deleteCancion;
+    }
+
+    async updateCancion(cancionID:string, createCancionDTO:CreateCancionDTO):Promise<Cancion>{
+        const updateCancion = await this.cancionModel.findByIdAndUpdate(cancionID, createCancionDTO, {new:true});
+        return updateCancion;
+    }
 }
