@@ -1,3 +1,4 @@
+//Importación de librerías, RUTAS, decoradores, incorporando interfaces y clases
 import { Controller, Get, Post, Put, Delete, Res, HttpStatus, Body, Param, NotFoundException, Query } from '@nestjs/common';
 import { json } from 'stream/consumers';
 
@@ -8,7 +9,8 @@ import { ApiParam, ApiTags } from '@nestjs/swagger';
 @ApiTags('Canción')
 @Controller('cancion')
 export class CancionController {
-  
+   
+  //instanciamos la clase CancionService en el constructor
   constructor(private cancionService:CancionService){}
     
     @Post('/create')
