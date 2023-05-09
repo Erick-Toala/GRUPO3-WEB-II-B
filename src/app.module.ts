@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+//importamos los modulos necesarios
 import { MongooseModule } from '@nestjs/mongoose';
 import { AutorModule } from './autor/autor.module';
 import { AlbumModule } from './album/album.module';
