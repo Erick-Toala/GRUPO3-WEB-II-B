@@ -12,7 +12,8 @@ export class CancionController {
    
   //instanciamos la clase CancionService en el constructor
   constructor(private cancionService:CancionService){}
-    
+   
+    //creamos un ruta a traves del metodo POST que nos permita insertar nuevas canciones
     @Post('/create')
     async createPost(@Res() res, @Body() createCancionDTO:CreateCancionDTO){
         const cancion = await this.cancionService.createCancion(createCancionDTO);
@@ -31,12 +32,14 @@ export class CancionController {
         })
     }
   
+    //creamos un ruta a traves del metodo GET que nos permita una cancion por su ID
     @ApiParam({
         name:'cancionID'
     })
     @Get('/:cancionID')
     async getCancion(@Res() res, @Param('cancionID') cancionID){
         const cancion = await this.cancionService.getCancion(cancionID);
+        //si no recibo/encuentra ninguna cancion, retornamos un error con el NotFoundException
         if(!cancion)throw new NotFoundException('La canción no existe');
         return res.status(HttpStatus.OK).json(cancion);
     }
