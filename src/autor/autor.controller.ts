@@ -1,13 +1,18 @@
+//Importación de librerías, RUTAS, decoradores, incorporando interfaces y clases
+
 import { Controller, Get, Post, Put, Delete, Res, HttpStatus, Body, Param, NotFoundException, Query } from '@nestjs/common';
 
 import {CreateAutorDTO} from './dto/autor.dto';
 import {AutorService} from './autor.service';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 
+//adjuntamos un controlador a una etiqueta específica (Artista) con el use el decorador @ApiTags
 @ApiTags('Artista')
 @Controller('autor')
 export class AutorController {
 
+    
+    //instanciamos la clase AutorService en el constructor
     constructor(private autorService: AutorService){}
 
     @Post('/create')
