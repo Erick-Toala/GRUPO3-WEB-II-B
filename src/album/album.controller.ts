@@ -1,4 +1,4 @@
-//Importación de librerías, RUTAS, decoradores, incorporando interfaces y clases
+///Importación de librerías, RUTAS, decoradores, incorporando interfaces y clases
 import { Controller, Get, Post, Put, Delete, Res, HttpStatus, Body, Param, NotFoundException, Query } from '@nestjs/common';
 
 import {CreateAlbumDTO} from './dto/album.dto';
