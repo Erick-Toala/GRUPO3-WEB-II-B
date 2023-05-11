@@ -28,6 +28,40 @@ export class AutorController {
         })
     }
 
-    
+    @ApiParam({
+        name:'autorID'
+    })
+    @Get('/:autorID')
+    async getCancion(@Res() res, @Param('autorID') autorID){
+        const autor = await this.autorService.getAutor(autorID);
+        if(!autor)throw new NotFoundException('El autor no existe');
+        return res.status(HttpStatus.OK).json(autor);
+    }
+
+    @ApiParam({
+        name:'autorID'
+    })
+    @Delete('/delete')
+    async deleteAutor(@Res() res, @Query('autorID') autorID){
+        const autorDeleted = await this.autorService.deleteAutor(autorID);
+        if(!autorDeleted)throw new NotFoundException('El autor no existe');
+        return res.status(HttpStatus.OK).json({
+            message:'Autor eliminada con éxito!',
+            autorDeleted
+        });
+    }
+
+    @ApiParam({
+        name:'autorID'
+    })
+    @Put('/update')
+    async updateAutor(@Res() res, @Body() createAutorDTO:CreateAutorDTO, @Query('autorID')autorID){
+        const actorUpdate = await this.autorService.updateAutor(autorID, createAutorDTO);
+        if(!actorUpdate)throw new NotFoundException('El autor no existe');
+        return res.status(HttpStatus.OK).json({
+            message:'Autor actualizada con éxito!',
+            actorUpdate
+        });
+    }
     
 }
