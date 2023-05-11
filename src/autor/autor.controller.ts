@@ -44,15 +44,15 @@ export class AutorController {
              if(!autor)throw new NotFoundException('El autor no existe');
         return res.status(HttpStatus.OK).json(autor);
     }
- 
+
     //creamos un ruta a traves del metodo DELETE que nos permita eliminar un autor por su ID
-   
     @ApiParam({
         name:'autorID'
     })
-    @Delete('/delete')
-    async deleteAutor(@Res() res, @Query('autorID') autorID){
+    @Delete('/delete/:autorID')
+    async deleteAutor(@Res() res, @Param('autorID') autorID){
         const autorDeleted = await this.autorService.deleteAutor(autorID);
+        //si no recibo/encuentra ningun autor retornamos un error con el NotFoundException
         if(!autorDeleted)throw new NotFoundException('El autor no existe');
         return res.status(HttpStatus.OK).json({
             message:'Autor eliminada con éxito!',
@@ -60,20 +60,18 @@ export class AutorController {
         });
     }
 
-     //creamos un ruta a traves del metodo PUT que nos permita actualizar un autor por su ID
-      @ApiParam({
+    //creamos un ruta a traves del metodo PUT que nos permita actualizar un autor por su ID
+    @ApiParam({
         name:'autorID'
     })
-    @Put('/update')
-    async updateAutor(@Res() res, @Body() createAutorDTO:CreateAutorDTO, @Query('autorID')autorID){
+    @Put('/update/:autorID')
+    async updateAutor(@Res() res, @Body() createAutorDTO:CreateAutorDTO, @Param('autorID')autorID){
         const actorUpdate = await this.autorService.updateAutor(autorID, createAutorDTO);
-       
-       //si no recibo/encuentra ningun autor retornamos un error con el NotFoundException
-              if(!actorUpdate)throw new NotFoundException('El autor no existe');
+        //si no recibo/encuentra ningun autor retornamos un error con el NotFoundException
+        if(!actorUpdate)throw new NotFoundException('El autor no existe');
         return res.status(HttpStatus.OK).json({
             message:'Autor actualizada con éxito!',
             actorUpdate
         });
     }
-   
 }
