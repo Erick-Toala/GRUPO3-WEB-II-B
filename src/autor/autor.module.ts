@@ -7,7 +7,10 @@ import {MongooseModule} from '@nestjs/mongoose';
 import {AutorSchema} from './schemas/autor.schema';
 
 @Module({
+
   imports:[
+
+  //definimos un nuevo Schema en mongoose para la entidad Autor basada en el schema AutorSchema
     MongooseModule.forFeature([
       {name:'Autor',schema:AutorSchema}
     ])
@@ -15,4 +18,6 @@ import {AutorSchema} from './schemas/autor.schema';
   controllers: [AutorController],
   providers: [AutorService]
 })
+
+
 export class AutorModule {}
