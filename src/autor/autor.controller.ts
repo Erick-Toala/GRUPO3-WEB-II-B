@@ -1,16 +1,15 @@
 import { Controller, Get, Post, Put, Delete, Res, HttpStatus, Body, Param, NotFoundException, Query } from '@nestjs/common';
+
 import {CreateAutorDTO} from './dto/autor.dto';
 import {AutorService} from './autor.service';
 import { ApiParam, ApiTags } from '@nestjs/swagger';
 
-
 @ApiTags('Artista')
-
 @Controller('autor')
-
 export class AutorController {
 
     constructor(private autorService: AutorService){}
+
     @Post('/create')
     async createPost(@Res() res, @Body() createAutorDTO:CreateAutorDTO){
         const autor = await this.autorService.createAutor(createAutorDTO);
@@ -37,7 +36,7 @@ export class AutorController {
         if(!autor)throw new NotFoundException('El autor no existe');
         return res.status(HttpStatus.OK).json(autor);
     }
-
+ 
     @ApiParam({
         name:'autorID'
     })
@@ -63,5 +62,5 @@ export class AutorController {
             actorUpdate
         });
     }
-    
+   
 }
