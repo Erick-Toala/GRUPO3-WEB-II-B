@@ -1,0 +1,28 @@
+Tema: Repertorio musical 80s API
+
+ENTIDAD - Autor
+	- id
+	- nombre
+	- nacionalidad
+	- fechaNacimiento
+	- urlFoto:String
+	- urlYouTube:String
+
+ENTIDAD - Cancion
+	- nombre
+	- duracion
+   	- idArtista
+    	- idAlbum
+    	- urlPortada
+    	- urlYouTube
+    	- fechaLanzamiento
+
+ENTIDAD - ALBUM
+    	- nombre
+    	- disquera
+    	- numCanciones
+    	- cancionPopular
+    	- idArtista
+    	- idCanciones
+    	- urlAlbum
+    	- fechaLanzamiento
