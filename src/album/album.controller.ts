@@ -41,12 +41,13 @@ export class AlbumController {
         //si no recibo/encuentra ningun album retornamos un error con el NotFoundException
         return res.status(HttpStatus.OK).json(album);
     }
+    
     //creamos un ruta a traves del metodo DELETE que nos permita eliminar un album por su ID
     @ApiParam({
         name:'albumID'
     })
-    @Delete('/delete')
-    async deleteAlbum(@Res() res, @Query('albumID') albumID){
+    @Delete('/delete/:albumID')
+    async deleteAlbum(@Res() res, @Param('albumID') albumID){
         const albumDeleted = await this.albumService.deleteAlbum(albumID);
         if(!albumDeleted)throw new NotFoundException('El álbum  no existe');
         //si no recibo/encuentra ningun album retornamos un error con el NotFoundException
@@ -55,15 +56,16 @@ export class AlbumController {
             albumDeleted
         });
     }
+
     //creamos un ruta a traves del metodo PUT que nos permita actualizar un album por su ID
     @ApiParam({
         name:'albumID'
     })
-    @Put('/update')
-    async updateAlbum(@Res() res, @Body() createAlbumDTO:CreateAlbumDTO, @Query('albumID')albumID){
+    @Put('/update/:albumID')
+    async updateAlbum(@Res() res, @Body() createAlbumDTO:CreateAlbumDTO, @Param('albumID')albumID){
         const albumUpdate = await this.albumService.updateAlbum(albumID, createAlbumDTO);
-        if(!albumUpdate)throw new NotFoundException('El álbum  no existe');
         //si no recibo/encuentra ningun album retornamos un error con el NotFoundException
+        if(!albumUpdate)throw new NotFoundException('El álbum  no existe');
         return res.status(HttpStatus.OK).json({
             message:'Álbum actualizada con éxito!',
             albumUpdate
